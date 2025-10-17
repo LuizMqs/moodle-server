@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NGINX_VERSION: ${NGINX_VERSION}
+        PHP_VERSION: ${PHP_VERSION}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./www.conf:/usr/local/php/etc/php-fpm.d/www.conf
+      - ./php-fpm.conf:/usr/local/php/etc/php-fpm.conf
+      - ./nginx.conf:/etc/nginx/nginx.conf
